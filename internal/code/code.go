@@ -123,6 +123,9 @@ func Execute(code Block) Result {
 		cmd := exec.Command(command[0], command[1:]...)
 		out, err := cmd.Output()
 		if err != nil {
+			if output.Len() != 0 {
+				output.Write([]byte("\n"))
+			}
 			output.Write([]byte(err.Error()))
 		} else {
 			output.Write(out)
